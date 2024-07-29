@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aal-hawa <aal-hawa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Anas Al Hawamda <aal-hawa@student.42abu    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:00:53 by aal-hawa          #+#    #+#             */
-/*   Updated: 2024/07/29 13:28:18 by aal-hawa         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:19:12 by Anas Al Haw      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,21 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		dst[j++] = s2[i++];
 	dst[j] = '\0';
-	// free(s1);
-	// free(s2);
-	// s1 = NULL;
-	// s2 = NULL;
+	free_char(s1);
 	return (dst);
 }
 
-char	*ft_strdup_line(char *str)
+char	*ft_strdup_line(char *str, int eof)
 {
 	char	*dst;
 	size_t	i;
 	size_t	len;
+
+	i = 0;
+	while (str[i] && str[i] != '\n' && eof == 1)
+		i++;
+	if (!str[i] && eof == 1)
+		return (NULL);
 
 	len = ft_strlen_line(str);
 	dst = malloc(sizeof(char) * (len + 1));
@@ -84,8 +87,6 @@ char	*ft_strdup_line(char *str)
 		i++;
 	}
 	dst[i] = '\0';
-	// free(str);
-	// str = NULL;
 	return (dst);
 }
 
@@ -96,6 +97,8 @@ char	*ft_strdup_after_line(char *str)
 	size_t	j;
 	size_t	len;
 
+	if (!str)
+		return (NULL);
 	len = ft_strlen(str) - ft_strlen_line(str);
 	dst = malloc(sizeof(char) * (len + 1));
 	if (!dst)
@@ -113,8 +116,8 @@ char	*ft_strdup_after_line(char *str)
 		j++;
 	}
 	dst[j] = '\0';
-	// free(str);
-	// str = NULL;
+	free_char(str);
+
 	return (dst);
 }
 

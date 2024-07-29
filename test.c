@@ -13,7 +13,7 @@ int	main(void)
 			break;
 		// printf("::%ld::\n", ft_strlen(text));
 		printf("%s", text);
-		free(text);
+		text = free_char(text);
 		text = NULL;
 	}
 	return (0);
