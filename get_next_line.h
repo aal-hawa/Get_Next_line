@@ -6,7 +6,7 @@
 /*   By: aal-hawa <aal-hawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:01:00 by aal-hawa          #+#    #+#             */
-/*   Updated: 2024/07/28 15:23:25 by aal-hawa         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:51:30 by aal-hawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-# define BUFFER_SIZE = 1024
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-char	*ft_strdup(const char *str);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+
+char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
-char	*ft_strdup_line(const char *str);
 size_t	ft_strlen_line(const char *s);
-char	*ft_strdup_after_line(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup_line(char *str);
+char	*ft_strdup_after_line(char *str);
+char	*ft_strjoin(char *s1, char *s2);
 
 
 #endif

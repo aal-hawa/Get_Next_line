@@ -6,7 +6,7 @@
 /*   By: aal-hawa <aal-hawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:00:53 by aal-hawa          #+#    #+#             */
-/*   Updated: 2024/07/28 15:27:47 by aal-hawa         ###   ########.fr       */
+/*   Updated: 2024/07/29 13:28:18 by aal-hawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ size_t	ft_strlen_line(const char *s)
 	i = 0;
 	while (s[i] && s[i] != '\n')
 		i++;
+	if (s[i] && s[i] == '\n')
+		i++;
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	len;
 	char	*dst;
@@ -53,12 +55,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		dst[j++] = s2[i++];
 	dst[j] = '\0';
+	// free(s1);
+	// free(s2);
+	// s1 = NULL;
+	// s2 = NULL;
 	return (dst);
 }
 
-
-
-char	*ft_strdup_line(const char *str)
+char	*ft_strdup_line(char *str)
 {
 	char	*dst;
 	size_t	i;
@@ -74,14 +78,22 @@ char	*ft_strdup_line(const char *str)
 		dst[i] = str[i];
 		i++;
 	}
+	if (str[i] && str[i] == '\n')
+	{
+		dst[i] = '\n';
+		i++;
+	}
 	dst[i] = '\0';
+	// free(str);
+	// str = NULL;
 	return (dst);
 }
 
-char	*ft_strdup_after_line(const char *str)
+char	*ft_strdup_after_line(char *str)
 {
 	char	*dst;
 	size_t	i;
+	size_t	j;
 	size_t	len;
 
 	len = ft_strlen(str) - ft_strlen_line(str);
@@ -89,16 +101,20 @@ char	*ft_strdup_after_line(const char *str)
 	if (!dst)
 		return (NULL);
 	i = 0;
+	j = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] && str[i] == '\n')
 		i++;
 	while (str[i])
 	{
-		dst[i] = str[i];
+		dst[j] = str[i];
 		i++;
+		j++;
 	}
-	dst[i] = '\0';
+	dst[j] = '\0';
+	// free(str);
+	// str = NULL;
 	return (dst);
 }
 
