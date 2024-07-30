@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aal-hawa <aal-hawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/28 11:00:07 by aal-hawa          #+#    #+#             */
-/*   Updated: 2024/07/30 14:09:49 by aal-hawa         ###   ########.fr       */
+/*   Created: 2024/07/30 14:37:32 by aal-hawa          #+#    #+#             */
+/*   Updated: 2024/07/30 14:41:44 by aal-hawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*free_char(char *this_string)
 {
@@ -70,18 +70,18 @@ char	*while_next_line(char **text_buffer, int fd, ssize_t bytesreed)
 
 char	*get_next_line(int fd)
 {
-	static char	*text_buffer;
+	static char	*text_buffer[1024];
 	ssize_t		bytesreed;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!text_buffer)
+	if (!text_buffer[fd])
 	{
-		text_buffer = malloc(sizeof(char) * 1);
-		if (!text_buffer)
+		text_buffer[fd] = malloc(sizeof(char) * 1);
+		if (!text_buffer[fd])
 			return (NULL);
-		text_buffer[0] = '\0';
+		text_buffer[fd][0] = '\0';
 	}
 	bytesreed = 1;
-	return (while_next_line(&text_buffer, fd, bytesreed));
+	return (while_next_line(&text_buffer[fd], fd, bytesreed));
 }
