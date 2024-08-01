@@ -6,7 +6,7 @@
 /*   By: aal-hawa <aal-hawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:00:07 by aal-hawa          #+#    #+#             */
-/*   Updated: 2024/07/30 14:09:49 by aal-hawa         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:57:29 by aal-hawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*while_next_line(char **text_buffer, int fd, ssize_t bytesreed)
 
 	while (bytesreed > 0)
 	{
-		returntext = malloc(sizeof(char) * BUFFER_SIZE);
+		returntext = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!returntext)
 			return (NULL);
 		bytesreed = read(fd, returntext, BUFFER_SIZE);
@@ -77,7 +77,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!text_buffer)
 	{
-		text_buffer = malloc(sizeof(char) * 1);
+		text_buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!text_buffer)
 			return (NULL);
 		text_buffer[0] = '\0';
